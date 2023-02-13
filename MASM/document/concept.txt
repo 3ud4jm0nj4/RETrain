@@ -1,0 +1,11 @@
+1.proc near/ proc far: near là hàm nằm cùng đoạn mã với chương trình đang gọi còn far là không nằm cùng
+
+2.RVA/VA: địa chỉ khi chương trình chạy được lưu trong bộ nhớ ảo
+
+3.Raw address/offset:địa chỉ khi chương trình chưa chạy, địa chỉ vật lý, dữ liệu thô
+( https://tech-zealots.com/malware-analysis/understanding-concepts-of-va-rva-and-offset/)
+
+4._ACRTIMP_ALT FILE* __cdecl __acrt_iob_func(unsigned);
+#define stdin  (__acrt_iob_func(0))
+#define stdout (__acrt_iob_func(1))
+#define stderr (__acrt_iob_func(2))
