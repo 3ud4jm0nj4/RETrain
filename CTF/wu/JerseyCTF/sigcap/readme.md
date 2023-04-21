@@ -18,7 +18,7 @@ Hàm main của chúng ta sẽ là `sub_178F`:
 
 ![exceptHandle.png](./img/exceptHandle.png)
 
-Sau khi đọc thì ta biết được hàm này sẽ xét một số giá trị cố định của `unk_4124`, sau đó lấy giá trị trong mảng `byte_4020` với chỉ số mảng là `unk_4124` rồi lưu vào biến `unk_412C`, vì vậy có thể `unk_412C` là flag, ở đây mảng `byte_4020` là bảng chữ cái:
+Sau khi đọc thì ta biết được hàm này sẽ xét một số giá trị cố định của `unk_4124`, sau đó lấy giá trị trong mảng `byte_4020` với chỉ số mảng là `unk_4124` rồi lưu vào biến `unk_412C`, vì vậy có thể `unk_412C` là flag vì ở đây mảng `byte_4020` là bảng chữ cái:
 
 ![ascii.png](./img/ascii.png)
 
@@ -30,11 +30,11 @@ Hàm này nếu tạo mã giả thì sẽ bị lỗi, có lẽ tác giả đã c
 
 ![mainReal.png](./img/mainReal.png)
 
-Mỗi hàm này có nhiệm vụ là lưu 1 giá trị vào `unk_4124` sau đó, có một câu lệnh `ud2` để tạo ra exception và sẽ gọi hàm `sub1481` để gen ra flag:
+Mỗi hàm này có nhiệm vụ là lưu 1 giá trị vào `unk_4124` sau đó, có một câu lệnh `ud2`(Undefined Instruction) để tạo ra exception và sẽ gọi hàm `sub1481` để gen ra flag:
 
 ![exception.png](./img/exception.png)
 
-Để tìm ra flag thì mình chỉ cần trace hết hàm `main` theo thứ tự đó thì sẽ ra flag. Chúng ta có thể đổi tên hàm thành số thứ tự mà hàm đó đẩy vào `unk_4124` và mô phỏng lại hàm xử lý exception bằng script:
+Để tìm ra flag thì mình chỉ cần trace hết hàm `main` theo thứ tự đó thì sẽ ra flag. Vì nhiều hàm sẽ gọi đi gọi lại, nên chúng ta có thể đổi tên hàm thành giá trị mà hàm đó đẩy vào `unk_4124`, lấy giá trị đó và mô phỏng lại hàm xử lý exception bằng script:
 ```python=
 key=[0x9,0x2,0x13,0x5,0x1A,0x46,0x13,0x44,0x2,0xA,0x1C,
       0x32,0x46,0x1C,0x30,0x11,0x21,0x44,0x13,0x1C,0x2C,
