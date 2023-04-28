@@ -19,7 +19,7 @@ for i in range(1293):
             matrix[j].append(0)
             adr+=0x0e
         if int.from_bytes(data[adr-7:adr-4],byteorder='big')!=0x488b05:
-            break;
+            break
         j+=1
     adr-=0x04
 
@@ -28,5 +28,13 @@ for i in range(0,len(neededBin),8):
     matrix[i>>3].append(int.from_bytes(neededBin[i:i+8],byteorder='little'))
 
 csv = open("Matrix.txt", "w")
-csv.write('\n'.join([','.join([str(num) for num in row]) for row in matrix]))
+csv.write("[")
+for i in range(1293):
+    for j in range(1293):
+        csv.write(str(matrix[j][i]))
+        csv.write(",")
+    if(i!=1292):
+     csv.write("],\n[")
+    else:
+     csv.write("]")
 csv.close()
