@@ -11,7 +11,7 @@ Load thử vào IDA64:
 
 ![main.png](./img/main.png)
 
-Chương trình check tham số đầu vào và độ dài sau đó copy input vào dest và gọi `sub_4014D2` và hàm này gọi nối tiếp nhau rất nhiều hàm khác:
+Chương trình check tham số đầu vào và độ dài sau đó copy input vào `dest` và gọi `sub_4014D2` và hàm này gọi nối tiếp nhau rất nhiều hàm khác:
 
 ![function.png](./img/function.png)
 
