@@ -11,15 +11,15 @@ Load thử vào IDA64:
 
 ![main.png](./img/main.png)
 
-Chương trình check tham số đầu vào và độ dài sau đó copy input vào `dest` và gọi `sub_4014D2` và hàm này gọi nối tiếp nhau rất nhiều hàm khác:
+Chương trình check tham số đầu vào và độ dài sau đó copy input vào `dest` rồi gọi `sub_4014D2` và hàm này gọi nối tiếp nhau rất nhiều hàm khác:
 
 ![function.png](./img/function.png)
 
-Mình vào `Strings` tìm xref của `Wrong flag :(` rồi xref của hàm gọi string đó thì được hàm `sub_401356`: 
+Mình vào `Strings` tìm xref của `Wrong flag :(` rồi xref của hàm gọi string đó thì được hàm cuối cùng của chuỗi gọi hàm `sub_401356`: 
 
 ![checkflag.png](./img/checkflag.png)
 
-Hàm `sub_401238` ở đây đang gọi hàm sys_mmap(0LL, 4096LL, 7LL, 34LL, 0xFFFFFFFFLL, 0LL):
+Hàm `sub_401238` ở đây đang gọi hàm `sys_mmap(0LL, 4096LL, 7LL, 34LL, 0xFFFFFFFFLL, 0LL)`:
 
 ![func1.png](./img/func1.png)
 
@@ -49,7 +49,7 @@ Trong này sẽ có một vòng lặp vô tận để gọi hàm `sub_401292()` 
 
 ![Xor.png](./img/Xor.png)
 
-Hàm này lấy đầu tiên lấy độ lớn của dữ liệu sẽ viết vào vùng nhớ mà ta khởi tạo ở `dword_40D0A0` với index là `value`, sau đó vào vòng lặp ghi `v5` lần dword vào trong vùng nhớ của chúng ta bằng cách lấy giá trị i `xor` với lại mảng `dword_40D0A0`. sau khi thực hiện xong chương trình quay lại hàm chính và thực thi đoạn opcode vừa xor đấy:
+Hàm này lấy đầu tiên lấy độ lớn của dữ liệu sẽ viết vào vùng nhớ mà ta khởi tạo ở `dword_40D0A0` với index là `value`, sau đó vào vòng lặp ghi `v5` lần dword vào trong vùng nhớ của chúng ta bằng cách lấy giá trị i `xor` với lại mảng `dword_40D0A0`. Sau khi thực hiện xong chương trình quay lại hàm chính và thực thi đoạn opcode vừa xor đấy:
 
 ![call.png](./img/call.png)
 
@@ -61,7 +61,7 @@ Hàm này gọi `syscall` với giá trị `65h` là hàm [`ptrace`](https://chr
 
 ![bypass.png](./img/bypass.png)
 
-Sau đó mình ngồi debug tiếp thì chương trình bị debug tại lần 125 lại bị thoát chương trình, mình lại debug lại từ đầu và xem hàm 124 xem làm gì(vì mình lười ấn và sợ ấn sai lại ấn lại nên dùng AutoKeyBoard =))  ). ở lần 124 chương trình chỉ check thanh ghi r12 xem có khác không hay không. Để qua được đây ta chỉ cần đặt breakpoint và sửa r12 thành 0:
+Sau đó mình ngồi debug tiếp thì tại lần 125 lại bị thoát chương trình, mình lại debug lại từ đầu và xem hàm 124 xem làm gì(Nếu ai lười ấn hoặc sợ ấn sai lại ấn lại nên dùng AutoKeyBoard `F9` =))  ). Ở lần 124 chương trình chỉ check thanh ghi r12 xem có khác không hay không. Để qua được đây ta chỉ cần đặt breakpoint và sửa r12 thành 0:
 
 ![bypass2.png](./img/bypass2.png)
 
